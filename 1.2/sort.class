@@ -1,6 +1,7 @@
 static void sort(int, int[][]);
     descriptor: (I[[I)V
     flags: (0x0008) ACC_STATIC
+// function starts
     Code:
       stack=5, locals=6, args_size=2
       StackMap locals:  int int[][]
@@ -19,9 +20,11 @@ static void sort(int, int[][]);
         start local 4 // boolean flag
       StackMap locals:  int int[][] top int int
       StackMap stack:
+//while (flag == 1)  loop starts
 //while(flag == true)
          7: iload         4    // load int value of  variable flag to stack
          9: iconst_1          // push int constant 1 onto the operand stack
+ //while (flag == 1)  loop condition 
         10: if_icmpne     117  //  if_icmpne succeeds if and only if value1 ≠ value2 ( if flag !=1) goto 117
 // flag = false;
         13: iconst_0           // push int constant 0 onto the operand stack
@@ -34,7 +37,9 @@ static void sort(int, int[][]);
       StackMap stack:
         19: iload         5      // load int value of  variable i to stack
         21: iload_3              // load int value of  variable R to stack
+//main loop for( int i = 0;i<n-1;i++) condition
         22: if_icmpge     111    //if_icmpge succeeds if and only if value1 ≥ value2  if i>=R goto 111 
+// main loop for( int i = 0;i<n-1;i++) starts
 //if(Array[i+1][size-2-i]>Array[i][size-1-i])
         25: aload_1
         26: iload         5
@@ -57,6 +62,7 @@ static void sort(int, int[][]);
         47: isub
         48: iaload
         49: if_icmple     105
+// if true branch start
 //tmp = Array[i+1][size-2-i];
         52: aload_1
         53: iload         5
@@ -107,16 +113,18 @@ static void sort(int, int[][]);
        102: iconst_1        // push int constant 1 onto the operand stack
        103: istore        4  // pull int value from stack and put to local variable vith index 4 ( flag = 1) 
         end local 2 // int tmp
-// 
+// if true branch end
        105: iinc          5, 1 // i++
        108: goto          19   // goto for loop head
+//main loop for( int i = 0;i<n-1;i++) ends
         end local 5 // int i
 //R--;
        111: iinc          3, -1 // increment  local variable vith index 3 --> R + (-1)
        114: goto          7     // goto while loop new iteration 
-//
+//while (flag == 1)  loop ends
        117: return
         end local 4 // boolean flag
         end local 3 // int R
         end local 1 // int[][] Array
         end local 0 // int size
+// function ends
