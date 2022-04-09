@@ -7,29 +7,35 @@ static void sort(int, int[][]);
       StackMap stack:
         start local 0 // int size
         start local 1 // int[][] Array
-         0: iload_0
-         1: iconst_1
-         2: isub
-         3: istore_3
-        start local 3 // int R
-         4: iconst_1
-         5: istore        4
+// int R = size - 1;
+         0: iload_0    // load int value of  variable size to stack
+         1: iconst_1   // push int constant 1 onto the operand stack
+         2: isub       // size - 1
+         3: istore_3   // store size-1 into local variable R
+        start local 3  // int R
+//boolean flag = true;
+         4: iconst_1  // push int constant 1 onto the operand stack
+         5: istore        4  // pull int value from stack and put to local variable vith index 4 ( flag = 1) 
         start local 4 // boolean flag
       StackMap locals:  int int[][] top int int
       StackMap stack:
-         7: iload         4
-         9: iconst_1
-        10: if_icmpne     117
-        13: iconst_0
-        14: istore        4
-        16: iconst_0
-        17: istore        5
+//while(flag == true)
+         7: iload         4    // load int value of  variable flag to stack
+         9: iconst_1          // push int constant 1 onto the operand stack
+        10: if_icmpne     117  //  if_icmpne succeeds if and only if value1 ≠ value2 ( if flag !=1) goto 117
+// flag = false;
+        13: iconst_0           // push int constant 0 onto the operand stack
+        14: istore        4    // pull int value from stack and put to local variable vith index 4 ( flag = 0) 
+//for (int i = 0; i < R; ++i) 
+        16: iconst_0             // push int constant 0 onto the operand stack
+        17: istore        5      // pull int value from stack and put to local variable vith index 5 ( i = 0) 
         start local 5 // int i
       StackMap locals:  int int[][] top int int int
       StackMap stack:
-        19: iload         5
-        21: iload_3
-        22: if_icmpge     111
+        19: iload         5      // load int value of  variable i to stack
+        21: iload_3              // load int value of  variable R to stack
+        22: if_icmpge     111    //if_icmpge succeeds if and only if value1 ≥ value2  if i>=R goto 111 
+//if(Array[i+1][size-2-i]>Array[i][size-1-i])
         25: aload_1
         26: iload         5
         28: iconst_1
@@ -51,6 +57,7 @@ static void sort(int, int[][]);
         47: isub
         48: iaload
         49: if_icmple     105
+//tmp = Array[i+1][size-2-i];
         52: aload_1
         53: iload         5
         55: iconst_1
@@ -64,6 +71,7 @@ static void sort(int, int[][]);
         64: iaload
         65: istore_2
         start local 2 // int tmp
+//Array[i+1][size-2-i] = Array[i][size-1-i];
         66: aload_1
         67: iload         5
         69: iconst_1
@@ -84,6 +92,7 @@ static void sort(int, int[][]);
         87: isub
         88: iaload
         89: iastore
+// Array[i][size-1-i] = tmp;
         90: aload_1
         91: iload         5
         93: aaload
@@ -94,14 +103,18 @@ static void sort(int, int[][]);
         99: isub
        100: iload_2
        101: iastore
-       102: iconst_1
-       103: istore        4
+//flag = true;
+       102: iconst_1        // push int constant 1 onto the operand stack
+       103: istore        4  // pull int value from stack and put to local variable vith index 4 ( flag = 1) 
         end local 2 // int tmp
-       105: iinc          5, 1
-       108: goto          19
+// 
+       105: iinc          5, 1 // i++
+       108: goto          19   // goto for loop head
         end local 5 // int i
-       111: iinc          3, -1
-       114: goto          7
+//R--;
+       111: iinc          3, -1 // increment  local variable vith index 3 --> R + (-1)
+       114: goto          7     // goto while loop new iteration 
+//
        117: return
         end local 4 // boolean flag
         end local 3 // int R
