@@ -1,0 +1,113 @@
+static void sort(int, int[][]);
+//function body starts
+       0: iload_0     // load int value vith index 0 (size)
+       1: iconst_1    // push int constant with value 1
+       2: isub       //  size-1
+       3: istore_3   // int  R = size-1
+
+       4: iconst_1  //   push int constant with value 1
+       5: istore        4  // store constant 1 (flag = 1)
+// while(flag == true)loop starts
+       7: iload         4 // load int value vith index 4 (flag)
+       9: iconst_1        // push int constant with value 1
+// while(flag == true)exit condition starts
+      10: if_icmpne     117 // Branch if  cmp succeeds  (if flag != 1) goto 117
+// while(flag == true)exit condition ends
+
+// while(flag == true)loop body starts
+      13: iconst_0          //push int constant with value 0
+      14: istore        4    // store constant 0 into int with index 4 (flag= 0)
+//loop for (int i = 0; i < R; ++i) starts
+      16: iconst_0           // push int constant with value 0
+      17: istore        5     // store constant 0 into int with index 5 ( i = 0)
+//loop for (int i = 0; i < R; ++i) exit condition starts
+      19: iload         5     // load int value vith index 5 (int i)
+      21: iload_3              // load int value vith index 3 (R)
+      22: if_icmpge     111    // succeeds if and only if i?R  goto 111 
+//loop for (int i = 0; i < R; ++i) exit condition ends
+
+//loop for (int i = 0; i < R; ++i) body starts
+// if check starts :if(Array[i+1][size-2-i]<=Array[i][size-1-i]
+      25: aload_1             // Load reference from local variable 
+      26: iload         5      //   load int value vith index 5 (i)
+      28: iconst_1            //   push int constant with value 1
+      29: iadd               // i+1
+      30: aaload              //  load Array[i+1]
+      31: iload_0            // load int value vith index 0 (size)
+      32: iconst_2          //   push int constant with value 2
+      33: isub              // size-2
+      34: iload         5    //   load int value vith index 5 (i)
+      36: isub               // size-2-i
+      37: iaload             // Load  Array[i+1][size-2-i]
+      38: aload_1            // Load reference from local variable 
+      39: iload         5    //   load int value vith index 5 (i)
+      41: aaload             //  load Array[i]
+      42: iload_0              // load int value vith index 0 (size)
+      43: iconst_1            //    push int constant with value 1
+      44: isub                // size-1
+      45: iload         5     //  load int value vith index 5 (i)
+      47: isub                // size-1-i
+      48: iaload                // Load Array[i][size-1-i]
+      49: if_icmple     105  // if(Array[i+1][size-2-i]<=Array[i][size-1-i]) goto 105
+// if check ends :if(Array[i+1][size-2-i]<=Array[i][size-1-i]
+
+// if  true branch starts 
+      52: aload_1               // Load reference from local variable 
+      53: iload         5      // load int value vith index 5 (i)
+      55: iconst_1                // push int constant with value 1
+      56: iadd                 // i+1
+      57: aaload               // load Array[i+1]
+      58: iload_0           // load int value vith index 0 (size)
+      59: iconst_2           // push int constant with value 2
+      60: isub               // size-2
+      61: iload         5      //  load int value vith index 5 (i)
+      63: isub                 // size-2-i
+      64: iaload             //  load Array[i+1][ size-2-i]
+      65: istore_2           // (tmp = Array[i+1][ size-2-i] )
+
+      66: aload_1             // Load reference from local variable 
+      67: iload         5      //  load int value vith index 5 (i)
+      69: iconst_1             //  push int constant with value 1
+      70: iadd                // i+1
+      71: aaload              // load Array[i+1]
+      72: iload_0             // load int value vith index 0 (size)
+      73: iconst_2            // push int constant with value 2
+      74: isub                // size-2
+      75: iload         5    //  load int value vith index 5 (i)
+      77: isub               // size-2-i
+      78: aload_1            // Load Array[i+1][size-2-i]
+      79: iload         5    // load int value vith index 5 (i)
+      81: aaload             // load Array[i]
+      82: iload_0            // load int value vith index 0 (size)
+      83: iconst_1            //  push int constant with value 1
+      84: isub                // size-1
+      85: iload         5      //  load int value vith index 5 (i)
+      87: isub                 // size-1-i
+      88: iaload               //  load Array[i][ size-1-i]
+      89: iastore              // Array[i+1][size-2-i] = Array[i][size-1-i] 
+
+      90: aload_1            //  load Array
+      91: iload         5    //  load int value vith index 5 (i)
+      93: aaload             // load Array[i]
+      94: iload_0            // load int value vith index 0 (size)
+      95: iconst_1           //  push int constant with value 1
+      96: isub               // size-1
+      97: iload         5    //    load int value vith index 5 (i)
+      99: isub               // size-1-i
+     100: iload_2            // load tmp
+     101: iastore           // Array[i][size-1-i] = tmp
+
+     102: iconst_1          //  push int constant with value 1
+     103: istore        4  // store constant 1 (flag= 1)
+// if  true branch ends 
+//loop for (int i = 0; i < R; ++i) body ends
+     105: iinc          5, 1  // i++
+     108: goto          19
+//loop for (int i = 0; i < R; ++i) ends
+     111: iinc          3, -1 // R--
+// while(flag == true)loop body ends
+     114: goto          7     // goto while(flag == true) cond.loop
+// while(flag == true)loop ends
+     117: return
+// function body ends
+
